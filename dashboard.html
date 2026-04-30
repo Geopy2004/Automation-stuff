@@ -1,0 +1,57 @@
+<?php include("../auth/session.php"); ?>
+<?php include("../config/db.php"); ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <div class="sidebar">
+    <h2>DTR</h2>
+    <a href="index.php">Dashboard</a>
+    <a href="../dtr/logs.php">Time Record</a>
+    <a href="../auth/logout.php">Logout</a>
+  </div>
+
+  <div class="main">
+    <h2>Dashboard</h2>
+
+    <?php
+    $uid = $_SESSION['user_id'];
+
+    $total = $conn->query("SELECT COUNT(*) as c FROM logs WHERE user_id=$uid")->fetch_assoc()['c'];
+
+    $lastIn = $conn->query("SELECT time FROM logs WHERE user_id=$uid AND type='Time In' ORDER BY id DESC LIMIT 1")->fetch_assoc();
+
+    $lastOut = $conn->query("SELECT time FROM logs WHERE user_id=$uid AND type='Time Out' ORDER BY id DESC LIMIT 1")->fetch_assoc();
+    ?>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Total Logs</h3>
+        <p><?= $total ?></p>
+      </div>
+
+      <div class="card">
+        <h3>Last Time In</h3>
+        <p><?= $lastIn['time'] ?? '-' ?></p>
+      </div>
+
+      <div class="card">
+        <h3>Last Time Out</h3>
+        <p><?= $lastOut['time'] ?? '-' ?></p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
