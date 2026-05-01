@@ -1,0 +1,104 @@
+/* ===== FORM GROUP ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+/* ===== INPUT FIELD (ROUNDED UPGRADE) ===== */
+.input-box input {
+  width: 100%;
+  padding: 16px 44px 14px 14px;
+
+  border-radius: 25px; /* 🔥 more round */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+
+  color: #fff;
+  font-size: 14px;
+
+  transition: 0.25s ease;
+}
+
+/* ===== FOCUS EFFECT ===== */
+.input-box input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* ===== ICON POSITION (adjust for rounded look) ===== */
+.input-box .icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+/* ===== FLOATING LABEL (works with round inputs) ===== */
+.input-box label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+
+  font-size: 13px;
+  color: rgba(203, 213, 245, 0.7);
+
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+
+/* float effect */
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 11px;
+  color: #3b82f6;
+
+  background: rgba(15, 23, 42, 0.9);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* ===== GLOW LINE (kept subtle for round UI) ===== */
+.input-box::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 0;
+
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+
+  transition: 0.3s ease;
+}
+
+.input-box:focus-within::after {
+  width: calc(100% - 30px);
+}
+
+/* ===== SWITCH TEXT ===== */
+.switch {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.switch a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.switch a:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
