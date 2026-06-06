@@ -6,18 +6,28 @@
   <title>Dashboard - Data Entry Automation</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
+<body class="dashboard-page">
 
-<main class="dashboard-container">
-  <div class="page-header">
+<header class="dashboard-topbar">
+  <a href="../index.php" class="dashboard-brand">DTR Automation</a>
+  <nav class="dashboard-nav" aria-label="Dashboard navigation">
+    <a href="../index.php">Home</a>
+    <a href="upload.php">Upload</a>
+    <a href="batch-process.php">Batch</a>
+    <a href="../auth/logout.php" class="logout-link">Logout</a>
+  </nav>
+</header>
+
+<main class="dashboard-container github-dashboard">
+  <div class="page-header dashboard-titlebar">
     <div>
-      <p class="eyebrow">Automation</p>
+      <p class="eyebrow">Repository Overview</p>
       <h1>Dashboard</h1>
       <p class="page-subtitle">Track uploaded files, extracted records, and processing results.</p>
     </div>
     <div class="header-actions">
       <a href="upload.php" class="btn primary">Upload File</a>
-      <a href="batch-process.php" class="btn secondary">Batch Process</a>
+      <a href="batch-process.php" class="btn">Batch Process</a>
     </div>
   </div>
 
@@ -39,7 +49,7 @@
   <section class="panel">
     <div class="section-title">
       <h3>Recent Uploads</h3>
-      <a href="../index.php" class="btn btn-small">Home</a>
+      <a href="../auth/logout.php" class="btn btn-small danger">Logout</a>
     </div>
     <div class="table-wrap">
       <table class="table" id="recentUploads">
