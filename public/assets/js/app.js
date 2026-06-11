@@ -1,6 +1,7 @@
 const body = document.body;
 const menuToggle = document.querySelector('.menu-toggle');
 const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+const loadingDuration = 3000;
 
 function setMenu(open) {
   body.classList.toggle('menu-open', open);
@@ -12,6 +13,15 @@ function setMenu(open) {
 
 function showLoading() {
   body.classList.add('is-loading');
+}
+
+function shouldDelayLink(link) {
+  const href = link.getAttribute('href') || '';
+  const target = link.getAttribute('target') || '';
+  const isDownload = link.hasAttribute('download');
+  const isExternal = href.startsWith('http') && !href.startsWith(window.location.origin);
+  const isAnchor = href.startsWith('#');
+  return href && !isDownload && !isExternal && !isAnchor && target !== '_blank';
 }
 
 menuToggle?.addEventListener('click', () => {
@@ -26,27 +36,28 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-document.querySelectorAll('.sidebar a').forEach((link) => {
-  link.addEventListener('click', () => {
+document.querySelectorAll('a[href]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    if (!shouldDelayLink(link)) {
+      return;
+    }
+
+    event.preventDefault();
     setMenu(false);
     showLoading();
-  });
-});
-
-document.querySelectorAll('a[href]').forEach((link) => {
-  link.addEventListener('click', () => {
-    const href = link.getAttribute('href') || '';
-    const isDownload = link.hasAttribute('download');
-    const isExternal = href.startsWith('http') && !href.startsWith(window.location.origin);
-    const isAnchor = href.startsWith('#');
-    if (!isDownload && !isExternal && !isAnchor) {
-      showLoading();
-    }
+    window.setTimeout(() => {
+      window.location.href = link.href;
+    }, loadingDuration);
   });
 });
 
 document.querySelectorAll('form').forEach((form) => {
-  form.addEventListener('submit', () => {
+  form.addEventListener('submit', (event) => {
+    if (form.dataset.loadingSubmit === 'true') {
+      return;
+    }
+
+    event.preventDefault();
     const button = form.querySelector('button[type="submit"]');
     if (button) {
       button.disabled = true;
@@ -54,6 +65,11 @@ document.querySelectorAll('form').forEach((form) => {
       button.textContent = 'Loading...';
     }
     showLoading();
+
+    window.setTimeout(() => {
+      form.dataset.loadingSubmit = 'true';
+      form.submit();
+    }, loadingDuration);
   });
 });
 
