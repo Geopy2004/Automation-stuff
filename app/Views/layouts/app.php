@@ -24,7 +24,20 @@ if (($authUser['role'] ?? '') === 'admin') {
 <body>
 <?php if ($authUser): ?>
   <div class="shell">
-    <aside class="sidebar">
+    <div class="loading-overlay" aria-hidden="true">
+      <div class="loader">
+        <span class="loader-emblem"></span>
+        <span class="loader-text">Loading</span>
+        <span class="loader-dots"><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+    </div>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="app-sidebar">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="sidebar-backdrop" data-close-sidebar></div>
+    <aside class="sidebar" id="app-sidebar">
       <a class="brand" href="<?= e(app_url('dashboard')) ?>">Automation<span>Suite</span></a>
       <nav>
         <?php foreach ($nav as $path => $label): ?>
@@ -54,6 +67,13 @@ if (($authUser['role'] ?? '') === 'admin') {
     </main>
   </div>
 <?php else: ?>
+  <div class="loading-overlay" aria-hidden="true">
+    <div class="loader">
+      <span class="loader-emblem"></span>
+      <span class="loader-text">Loading</span>
+      <span class="loader-dots"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
   <main class="auth-page">
     <?php foreach ($flash as $type => $message): ?>
       <div class="alert <?= e($type) ?>"><?= e($message) ?></div>
