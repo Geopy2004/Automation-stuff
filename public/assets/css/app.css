@@ -174,7 +174,7 @@ input:focus, textarea:focus, select:focus { outline: 2px solid rgba(56, 189, 248
 .loader::before { top: 114px; }
 .loader::after {
   bottom: 14px;
-  animation: loader-line 2.2s ease-in-out infinite;
+  animation: loader-line 3s ease-in-out infinite;
 }
 .loader-emblem {
   position: relative;
@@ -188,7 +188,7 @@ input:focus, textarea:focus, select:focus { outline: 2px solid rgba(56, 189, 248
   box-shadow:
     0 0 28px rgba(56, 189, 248, .28),
     inset 0 0 22px rgba(45, 212, 191, .18);
-  animation: loader-emblem 2.8s linear infinite;
+  animation: loader-emblem 3s linear infinite;
 }
 .loader-emblem::before,
 .loader-emblem::after {
@@ -243,7 +243,7 @@ input:focus, textarea:focus, select:focus { outline: 2px solid rgba(56, 189, 248
   transform: translateX(-50%);
   background: linear-gradient(90deg, transparent, var(--brand), transparent);
   filter: drop-shadow(0 0 8px rgba(56, 189, 248, .8));
-  animation: loader-glint 2.2s ease-in-out infinite;
+  animation: loader-glint 3s ease-in-out infinite;
 }
 
 @keyframes contentIn {
