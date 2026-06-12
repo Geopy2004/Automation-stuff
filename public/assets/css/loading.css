@@ -1,0 +1,194 @@
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(50, 49, 204, .18), transparent 24%),
+    linear-gradient(180deg, rgba(11, 16, 32, .88), rgba(2, 6, 23, .94));
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  transition: opacity .24s ease;
+  overflow: hidden;
+}
+
+.loading-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 24% 32%, rgba(50, 49, 204, .16), transparent 13%),
+    radial-gradient(circle at 76% 64%, rgba(56, 189, 248, .11), transparent 15%);
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+.is-loading .loading-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.is-loading .loading-overlay::before {
+  animation: atom-bg-drift 3s ease-in-out both;
+}
+
+.loader {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(180px, 52vw);
+  aspect-ratio: 1;
+  color: #3231cc;
+  opacity: 0;
+  transform: translateY(10px) scale(.96);
+}
+
+.is-loading .loader {
+  animation: atom-enter 3s ease both;
+}
+
+.atom-loader {
+  position: relative;
+  display: block;
+  width: 112px;
+  height: 112px;
+  color: #3231cc;
+  filter: drop-shadow(0 0 22px rgba(50, 49, 204, .52));
+  animation: atom-float 1.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.atom-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow:
+    0 0 0 8px rgba(50, 49, 204, .12),
+    0 0 24px rgba(50, 49, 204, .72);
+  transform: translate(-50%, -50%);
+  animation: atom-core-pulse 1.2s ease-in-out infinite;
+}
+
+.atom-orbit {
+  position: absolute;
+  left: 0;
+  top: 34px;
+  width: 112px;
+  height: 44px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  opacity: .86;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.atom-orbit::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -7px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 14px rgba(50, 49, 204, .82);
+  transform: translateX(-50%);
+}
+
+.atom-orbit-one {
+  animation: atom-orbit-one .9s linear infinite;
+}
+
+.atom-orbit-two {
+  animation: atom-orbit-two 1.05s linear infinite;
+}
+
+.atom-orbit-three {
+  animation: atom-orbit-three 1.2s linear infinite;
+}
+
+@keyframes atom-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(.9);
+  }
+  16%, 84% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: .95;
+    transform: translateY(-4px) scale(.98);
+  }
+}
+
+@keyframes atom-bg-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(-1.5%, 1%, 0) scale(1.04);
+  }
+  35%, 80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .76;
+    transform: translate3d(1.5%, -1%, 0) scale(1.08);
+  }
+}
+
+@keyframes atom-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes atom-core-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(.9);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+@keyframes atom-orbit-one {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes atom-orbit-two {
+  from { transform: rotate(60deg); }
+  to { transform: rotate(420deg); }
+}
+
+@keyframes atom-orbit-three {
+  from { transform: rotate(-60deg); }
+  to { transform: rotate(300deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-loading .loading-overlay::before { animation-duration: 3s !important; }
+  .is-loading .loader { animation-duration: 3s !important; }
+  .atom-loader { animation-duration: 1.8s !important; }
+  .atom-core { animation-duration: 1.2s !important; }
+  .atom-orbit-one { animation-duration: .9s !important; }
+  .atom-orbit-two { animation-duration: 1.05s !important; }
+  .atom-orbit-three { animation-duration: 1.2s !important; }
+
+  .is-loading .loading-overlay::before { animation-iteration-count: 1 !important; }
+  .is-loading .loader { animation-iteration-count: 1 !important; }
+  .atom-loader,
+  .atom-core,
+  .atom-orbit {
+    animation-iteration-count: infinite !important;
+  }
+}

@@ -2,9 +2,6 @@ const body = document.body;
 const menuToggle = document.querySelector('.menu-toggle');
 const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
 const loadingDuration = 3000;
-const loaderPhases = ['Loading', 'Preparing', 'Opening', 'Almost ready'];
-let loadingFrame = 0;
-let loadingStartedAt = 0;
 
 function setMenu(open) {
   body.classList.toggle('menu-open', open);
@@ -15,43 +12,7 @@ function setMenu(open) {
 }
 
 function showLoading() {
-  window.cancelAnimationFrame(loadingFrame);
-  loadingStartedAt = performance.now();
   body.classList.add('is-loading');
-
-  document.querySelectorAll('.loader').forEach((loader) => {
-    const text = loader.querySelector('.loader-text');
-    loader.classList.remove('is-primed');
-    loader.style.setProperty('--loader-progress', '0%');
-    if (text) {
-      text.textContent = loaderPhases[0];
-    }
-
-    window.requestAnimationFrame(() => {
-      loader.classList.add('is-primed');
-    });
-  });
-
-  updateLoadingEffect(loadingStartedAt);
-}
-
-function updateLoadingEffect(now) {
-  const elapsed = Math.min(now - loadingStartedAt, loadingDuration);
-  const progress = elapsed / loadingDuration;
-  const progressPercent = `${Math.round(progress * 100)}%`;
-  const phaseIndex = Math.min(loaderPhases.length - 1, Math.floor(progress * loaderPhases.length));
-
-  document.querySelectorAll('.loader').forEach((loader) => {
-    const text = loader.querySelector('.loader-text');
-    loader.style.setProperty('--loader-progress', progressPercent);
-    if (text) {
-      text.textContent = loaderPhases[phaseIndex];
-    }
-  });
-
-  if (elapsed < loadingDuration) {
-    loadingFrame = window.requestAnimationFrame(updateLoadingEffect);
-  }
 }
 
 function shouldDelayLink(link) {
