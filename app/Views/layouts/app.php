@@ -27,11 +27,12 @@ if (($authUser['role'] ?? '') === 'admin') {
   <div class="shell">
     <div class="loading-overlay" aria-hidden="true">
       <div class="loader">
-        <span class="loader-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-        <span class="loader-emblem"></span>
-        <span class="loader-text">Loading</span>
-        <span class="loader-dots"><i></i><i></i><i></i><i></i><i></i></span>
-        <span class="loader-progress" aria-hidden="true"><span></span></span>
+        <span class="atom-loader" aria-hidden="true">
+          <span class="atom-orbit atom-orbit-one"></span>
+          <span class="atom-orbit atom-orbit-two"></span>
+          <span class="atom-orbit atom-orbit-three"></span>
+          <span class="atom-core"></span>
+        </span>
       </div>
     </div>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="app-sidebar">
@@ -72,11 +73,12 @@ if (($authUser['role'] ?? '') === 'admin') {
 <?php else: ?>
   <div class="loading-overlay" aria-hidden="true">
     <div class="loader">
-      <span class="loader-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-      <span class="loader-emblem"></span>
-      <span class="loader-text">Loading</span>
-      <span class="loader-dots"><i></i><i></i><i></i><i></i><i></i></span>
-      <span class="loader-progress" aria-hidden="true"><span></span></span>
+      <span class="atom-loader" aria-hidden="true">
+        <span class="atom-orbit atom-orbit-one"></span>
+        <span class="atom-orbit atom-orbit-two"></span>
+        <span class="atom-orbit atom-orbit-three"></span>
+        <span class="atom-core"></span>
+      </span>
     </div>
   </div>
   <main class="auth-page">
